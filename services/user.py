@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from typing import Optional
 
-User = get_user_model()
+from db.models import User
 
 
 def create_user(
@@ -12,7 +12,10 @@ def create_user(
     first_name: Optional[str] = None,
     last_name: Optional[str] = None
 ) -> User:
-    user = User.objects.create_user(username=username, password=password)
+    user = get_user_model().objects.create_user(
+        username=username,
+        password=password
+    )
 
     if email:
         user.email = email
@@ -27,7 +30,7 @@ def create_user(
 
 def get_user(user_id: int) -> Optional[User]:
     try:
-        return User.objects.get(id=user_id)
+        return get_user_model().objects.get(id=user_id)
     except ObjectDoesNotExist:
         return None
 
