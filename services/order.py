@@ -16,7 +16,7 @@ def create_order(
         raise ValueError(f"User with username '{username}' does not exist.")
 
     created_at = date if date else timezone.now()
-    order = Order.objects.create(user=user, create_at=created_at)
+    order = Order.objects.create(user=user, created_at=created_at)
 
     for ticket in tickets:
         try:
