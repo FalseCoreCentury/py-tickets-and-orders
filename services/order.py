@@ -33,7 +33,7 @@ def create_order(
         except MovieSession.DoesNotExist:
             raise ValueError(
                 f"Movie session with id "
-                f"'{ticket["movie_session"]}' does not exist."
+                f"'{ticket['movie_session']}' does not exist."
             )
 
     return order
